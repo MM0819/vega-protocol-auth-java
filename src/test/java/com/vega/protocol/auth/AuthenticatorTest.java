@@ -34,6 +34,7 @@ public class AuthenticatorTest {
         // sign the tx
         var tx = authenticator.sign(wallet.get(0).getPublicKey(), pow, lastBlock, inputData);
         log.info("{}", tx);
+        // submit the tx to the network
         var resp = authenticator.submitTx(tx);
         log.info("{}", resp);
     }
