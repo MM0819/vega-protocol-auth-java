@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import vega.Governance;
 import vega.commands.v1.Commands;
+import vega.commands.v1.TransactionOuterClass;
+
+import java.util.Random;
 
 @Slf4j
 public class AuthenticatorTest {
@@ -25,7 +28,9 @@ public class AuthenticatorTest {
         // get new pow
         var pow = authenticator.getProofOfWork(lastBlock);
         // build the tx
-        var inputData = authenticator.getInputDataBuilder(pow)
+        var inputData = TransactionOuterClass.InputData.newBuilder()
+                .setNonce(Math.abs(new Random().nextLong()))
+                .setBlockHeight(lastBlock.getHeight())
                 .setVoteSubmission(Commands.VoteSubmission.newBuilder()
                         .setProposalId(PROPOSAL_ID)
                         .setValue(Governance.Vote.Value.VALUE_YES)

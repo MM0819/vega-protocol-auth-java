@@ -155,14 +155,6 @@ public class Authenticator {
         return zeroes;
     }
 
-    public TransactionOuterClass.InputData.Builder getInputDataBuilder(
-            final ProofOfWork pow
-    ) {
-        return TransactionOuterClass.InputData.newBuilder()
-                .setNonce(Math.abs(new Random().nextLong()))
-                .setBlockHeight(pow.getBlockHeight());
-    }
-
     public TransactionOuterClass.Transaction sign(
             final String partyId,
             final ProofOfWork pow,
